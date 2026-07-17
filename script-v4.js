@@ -178,28 +178,32 @@ revealElements.forEach(function (el) { revealObserver.observe(el); });
   if (firstActive) startSlider(firstActive);
 }());
 
-// ── Typewriter: "Resultados que aparecem." ──
+// ── Typewriter: "Resultados" and "que aparecem." ──
 (function () {
-  const textEl = document.querySelector(".hero h1 span");
-  if (!textEl) return;
-  const text = textEl.textContent.trim();
-  textEl.innerHTML = "";
-  textEl.style.opacity = "1";
+  const textEls = document.querySelectorAll(".hero h1 > span");
+  if (textEls.length === 0) return;
 
-  const fragment = document.createDocumentFragment();
-  const spans = [];
+  const allSpans = [];
 
-  text.split("").forEach(function (char) {
-    const span = document.createElement("span");
-    span.textContent = char;
-    span.style.cssText = "opacity:0;transform:translateY(6px);transition:opacity 300ms cubic-bezier(0.16,1,0.3,1),transform 300ms cubic-bezier(0.16,1,0.3,1);display:" + (char === " " ? "inline" : "inline-block");
-    fragment.appendChild(span);
-    spans.push(span);
+  textEls.forEach(function (textEl) {
+    const text = textEl.textContent.trim();
+    textEl.innerHTML = "";
+    textEl.style.opacity = "1";
+
+    const fragment = document.createDocumentFragment();
+
+    text.split("").forEach(function (char) {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.style.cssText = "opacity:0;transform:translateY(6px);transition:opacity 300ms cubic-bezier(0.16,1,0.3,1),transform 300ms cubic-bezier(0.16,1,0.3,1);display:" + (char === " " ? "inline" : "inline-block");
+      fragment.appendChild(span);
+      allSpans.push(span);
+    });
+
+    textEl.appendChild(fragment);
   });
 
-  textEl.appendChild(fragment);
-
-  spans.forEach(function (span, i) {
+  allSpans.forEach(function (span, i) {
     setTimeout(function () {
       requestAnimationFrame(function () {
         span.style.opacity = "1";
