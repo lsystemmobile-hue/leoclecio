@@ -975,7 +975,7 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(3.1rem, 14vw, 5.8rem);
+    font-size: clamp(2.4rem, 12vw, 5.8rem);
   }
 
   .hero__scroll {
@@ -1095,7 +1095,8 @@ a {
   }
 
   .hero h1 {
-    letter-spacing: -0.065em;
+    font-size: clamp(1.9rem, 10vw, 3rem);
+    letter-spacing: -0.04em;
   }
 
   .hero__action {
