@@ -1095,7 +1095,7 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(1.9rem, 10vw, 3rem);
+    font-size: clamp(1.2rem, 7.5vw, 2.5rem);
     letter-spacing: -0.04em;
   }
 
