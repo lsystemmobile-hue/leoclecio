@@ -300,7 +300,7 @@ if (form) {
 
     // Generate WhatsApp text
     const textMsg = 
-      "Olá Leoclecio! Solicitei uma demonstração grátis do meu site (Site Express 7h).\n\n" +
+      "Olá Leoclecio! Enviei a solicitação do meu Site Express (7h).\n\n" +
       "*Nome:* " + name + "\n" +
       "*WhatsApp:* " + whatsapp + "\n" +
       "*E-mail:* " + email + "\n" +
