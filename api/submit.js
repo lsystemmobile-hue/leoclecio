@@ -25,7 +25,7 @@ module.exports = function handler(req, res) {
   
   // Format HTML content for the email
   const htmlContent = `
-    <h2>Nova solicitação de demonstração (Site Express 7h)</h2>
+    <h2>Nova solicitação (Site Express 7h)</h2>
     <hr/>
     <p><strong>Nome:</strong> ${name}</p>
     <p><strong>WhatsApp:</strong> ${whatsapp}</p>

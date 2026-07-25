@@ -338,7 +338,7 @@ if (form) {
     let requestBody;
     if (isLocal) {
       const htmlContent = `
-        <h2>Nova solicitação de demonstração (Site Express 7h)</h2>
+        <h2>Nova solicitação (Site Express 7h)</h2>
         <hr/>
         <p><strong>Nome:</strong> ${name}</p>
         <p><strong>WhatsApp:</strong> ${whatsapp}</p>
