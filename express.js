@@ -155,7 +155,7 @@ function startCountdown(deadline) {
 
 // ── Handle view states based on LocalStorage deadline ──
 function checkActiveDeadline() {
-  const storedDeadline = localStorage.getItem("express_demo_deadline");
+  const storedDeadline = localStorage.getItem("express_demo_deadline_v2");
   if (storedDeadline) {
     const deadline = parseInt(storedDeadline, 10);
     if (deadline > Date.now()) {
@@ -163,7 +163,7 @@ function checkActiveDeadline() {
       form.style.display = "none";
       successCard.style.display = "flex";
       
-      const storedWhatsAppLink = localStorage.getItem("express_demo_whatsapp_link");
+      const storedWhatsAppLink = localStorage.getItem("express_demo_whatsapp_link_v2");
       if (storedWhatsAppLink && whatsappBtn) {
         whatsappBtn.setAttribute("href", storedWhatsAppLink);
       }
@@ -171,8 +171,8 @@ function checkActiveDeadline() {
       startCountdown(deadline);
     } else {
       // Stored deadline has passed, clear it so they can submit again
-      localStorage.removeItem("express_demo_deadline");
-      localStorage.removeItem("express_demo_whatsapp_link");
+      localStorage.removeItem("express_demo_deadline_v2");
+      localStorage.removeItem("express_demo_whatsapp_link_v2");
     }
   }
 }
@@ -393,8 +393,8 @@ if (form) {
 
     // Set deadline & save states to LocalStorage
     const targetDeadline = Date.now() + DEMO_DURATION;
-    localStorage.setItem("express_demo_deadline", targetDeadline.toString());
-    localStorage.setItem("express_demo_whatsapp_link", waLink);
+    localStorage.setItem("express_demo_deadline_v2", targetDeadline.toString());
+    localStorage.setItem("express_demo_whatsapp_link_v2", waLink);
 
     // Transition form to Success screen
     form.classList.add("fade-out");
