@@ -165,7 +165,9 @@ function checkActiveDeadline() {
       
       const storedWhatsAppLink = localStorage.getItem("express_demo_whatsapp_link_v2");
       if (storedWhatsAppLink && whatsappBtn) {
-        whatsappBtn.setAttribute("href", storedWhatsAppLink);
+        whatsappBtn.addEventListener("click", function () {
+          window.open(storedWhatsAppLink, "_blank", "noopener,noreferrer");
+        });
       }
       
       startCountdown(deadline);
@@ -386,9 +388,11 @@ if (form) {
       console.error("Erro Brevo:", error);
     });
 
-    // Set link to button
+    // Set link to button — opens only on explicit user click
     if (whatsappBtn) {
-      whatsappBtn.setAttribute("href", waLink);
+      whatsappBtn.addEventListener("click", function () {
+        window.open(waLink, "_blank", "noopener,noreferrer");
+      });
     }
 
     // Set deadline & save states to LocalStorage
