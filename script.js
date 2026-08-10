@@ -136,21 +136,24 @@ revealElements.forEach(function (el) { revealObserver.observe(el); });
 
   function startSlider(panel) {
     if (started.has(panel)) return;
-    const sliderEl = panel.querySelector(".portfolio__slider");
-    if (!sliderEl) return;
+    const sliders = panel.querySelectorAll(".portfolio__slider");
+    if (sliders.length === 0) return;
     started.add(panel);
-    const slides = Array.from(sliderEl.querySelectorAll(".portfolio__slide"));
-    if (slides.length < 2) return;
-    let current = 0;
 
-    function goTo(index) {
-      slides[current].classList.remove("is-active");
-      current = index % slides.length;
-      slides[current].classList.add("is-active");
-      setTimeout(function () { goTo(current + 1); }, 1800);
-    }
+    sliders.forEach(function (sliderEl) {
+      const slides = Array.from(sliderEl.querySelectorAll(".portfolio__slide"));
+      if (slides.length < 2) return;
+      let current = 0;
 
-    setTimeout(function () { goTo(1); }, 1800);
+      function goTo(index) {
+        slides[current].classList.remove("is-active");
+        current = index % slides.length;
+        slides[current].classList.add("is-active");
+        setTimeout(function () { goTo(current + 1); }, 1800);
+      }
+
+      setTimeout(function () { goTo(1); }, 1800);
+    });
   }
 
   function switchTab(target) {
