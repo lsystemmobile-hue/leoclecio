@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Currículo online de Leoclecio Ambrosio — Desenvolvedor de Soluções Digitais." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f5efe6" />
+    <title>Currículo | Leoclecio Ambrosio</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css?v=6.0" />
+    <script src="script.js?v=6.0" defer></script>
+
+    <style>
+      /* ================================================
+         CURRÍCULO ONLINE — estilos exclusivos
+         Herda tokens do style.css: --background, --accent,
+         --surface, --text, --muted, --line, --shadow, --radius
+         ================================================ */
+
+      /* ── Hero ── */
+      .cv-hero {
+        position: relative;
+        min-height: 88svh;
+        overflow: hidden;
+      }
+
+      .cv-hero::before {
+        position: absolute;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(17,17,17,0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17,17,17,0.07) 1px, transparent 1px);
+        background-size: 70px 70px;
+        mask-image: linear-gradient(to bottom, #000, transparent 86%);
+      }
+
+      .cv-hero__inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 88svh;
+        padding-block: 160px 80px;
+        gap: 24px;
+      }
+
+      .cv-name {
+        font-size: clamp(3.4rem, 10vw, 9rem);
+        font-weight: 850;
+        letter-spacing: -0.075em;
+        line-height: 0.88;
+      }
+
+      .cv-name span {
+        color: transparent;
+        -webkit-text-stroke: 1.5px var(--accent);
+        letter-spacing: -0.03em;
+      }
+
+      .cv-title {
+        font-size: clamp(1rem, 2.2vw, 1.3rem);
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      /* ── Contact chips ── */
+      .cv-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .cv-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.55);
+        border: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text);
+        text-decoration: none;
+        transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+        white-space: nowrap;
+      }
+
+      .cv-chip:is(a):hover {
+        background: rgba(255,255,255,0.9);
+        border-color: rgba(255,113,0,0.5);
+        transform: translateY(-2px);
+      }
+
+      .cv-chip svg {
+        width: 14px;
+        height: 14px;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .cv-chip--plain {
+        pointer-events: none;
+      }
+
+      /* ── Section base ── */
+      .cv-sec {
+        padding-block: 90px;
+        border-top: 1px solid var(--line);
+      }
+
+      /* ── About ── */
+      .cv-about-grid {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 56px;
+        align-items: flex-start;
+      }
+
+      .cv-photo-wrap {
+        position: relative;
+        width: 140px;
+        aspect-ratio: 4 / 5;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(17,17,17,0.08);
+      }
+
+      .cv-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 500ms ease;
+      }
+
+      .cv-photo-wrap:hover .cv-photo { transform: scale(1.04); }
+
+      .cv-about-body {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .cv-about-name {
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        font-weight: 850;
+        letter-spacing: -0.065em;
+        line-height: 0.9;
+      }
+
+      .cv-about-role {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+      }
+
+      .cv-about-text {
+        font-size: 1rem;
+        line-height: 1.75;
+        color: var(--muted);
+        max-width: 620px;
+      }
+
+      .cv-about-text + .cv-about-text { margin-top: 0; }
+
+      /* ── Experience cards ── */
+      .cv-exp-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .cv-exp-card {
+        background: var(--surface);
+        border: 1px solid rgba(17,17,17,0.07);
+        border-radius: var(--radius);
+        padding: 36px;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        transition: border-color 260ms ease, box-shadow 260ms ease, transform 440ms cubic-bezier(0.16,1,0.3,1);
+      }
+
+      .cv-exp-card::after {
+        position: absolute;
+        right: -55px; bottom: -55px;
+        width: 170px; height: 170px;
+        border-radius: 50%;
+        content: "";
+        background: var(--accent-soft);
+        opacity: 0.45;
+        transition: transform 350ms ease;
+      }
+
+      .cv-exp-card:hover {
+        border-color: rgba(255,113,0,0.28);
+        box-shadow: 0 28px 72px rgba(45,31,17,0.12);
+        transform: translateY(-4px);
+      }
+
+      .cv-exp-card:hover::after { transform: scale(1.22); }
+
+      .cv-exp-icon {
+        display: grid;
+        width: 52px; height: 52px;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        margin-bottom: 22px;
+        position: relative; z-index: 1;
+      }
+
+      .cv-exp-icon svg {
+        width: 24px; height: 24px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.7;
+      }
+
+      .cv-exp-badge {
+        display: inline-flex;
+        padding: 4px 11px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: #b34f00;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        position: relative; z-index: 1;
+      }
+
+      .cv-exp-company {
+        font-size: 1.3rem;
+        font-weight: 850;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        position: relative; z-index: 1;
+      }
+
+      .cv-exp-role {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: 700;
+        margin-top: 4px;
+        position: relative; z-index: 1;
+      }
+
+      .cv-exp-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+        position: relative; z-index: 1;
+      }
+
+      .cv-exp-list li {
+        display: grid;
+        grid-template-columns: 18px 1fr;
+        gap: 10px;
+        align-items: baseline;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .cv-exp-list li::before {
+        content: "";
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-top: 8px;
+        justify-self: center;
+      }
+
+      /* ── Services (O que faço) ── */
+      /* Reutiliza o .service__card do style.css com ajustes mínimos */
+      .cv-services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .cv-svc-card {
+        background: var(--surface);
+        border: 1px solid rgba(17,17,17,0.08);
+        border-radius: var(--radius);
+        padding: 38px 34px;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        transition: border-color 260ms ease, box-shadow 260ms ease, transform 550ms cubic-bezier(0.16,1,0.3,1);
+      }
+
+      .cv-svc-card::after {
+        position: absolute;
+        right: -60px; bottom: -80px;
+        width: 180px; height: 180px;
+        border-radius: 50%;
+        content: "";
+        background: var(--accent-soft);
+        opacity: 0.6;
+        transition: transform 350ms ease;
+      }
+
+      .cv-svc-card:hover {
+        border-color: rgba(255,113,0,0.32);
+        box-shadow: 0 30px 80px rgba(45,31,17,0.13);
+      }
+
+      .cv-svc-card:hover::after { transform: scale(1.18); }
+
+      .cv-svc-num {
+        position: absolute;
+        top: 22px; right: 26px;
+        color: rgba(17,17,17,0.07);
+        font-size: 4rem;
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        line-height: 1;
+      }
+
+      .cv-svc-icon {
+        position: relative; z-index: 1;
+        display: grid;
+        width: 54px; height: 54px;
+        place-items: center;
+        border-radius: 17px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        margin-bottom: 28px;
+      }
+
+      .cv-svc-icon svg {
+        width: 26px; height: 26px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.7;
+      }
+
+      .cv-svc-card h3 {
+        position: relative; z-index: 1;
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+        letter-spacing: -0.04em;
+        line-height: 1.15;
+        margin-bottom: 12px;
+      }
+
+      .cv-svc-card p {
+        position: relative; z-index: 1;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .cv-svc-tag {
+        position: relative; z-index: 1;
+        display: inline-flex;
+        margin-top: 22px;
+        padding: 7px 13px;
+        border-radius: 999px;
+        color: #b34f00;
+        background: var(--accent-soft);
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      /* ── Projects (Separate Cards) ── */
+      .cv-projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .cv-proj-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+        background: var(--surface);
+        border: 1px solid rgba(17,17,17,0.07);
+        border-radius: var(--radius);
+        padding: 48px;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        transition: border-color 260ms ease, box-shadow 260ms ease, transform 440ms cubic-bezier(0.16,1,0.3,1);
+        overflow: hidden;
+      }
+
+      .cv-proj-card:hover {
+        border-color: rgba(255,113,0,0.28);
+        box-shadow: 0 30px 80px rgba(45,31,17,0.12);
+        transform: translateY(-4px);
+      }
+
+      .cv-proj-card:nth-child(even) .cv-proj-img-wrap {
+        order: 1;
+      }
+
+      .cv-proj-img-wrap {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cv-proj-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+        background: transparent;
+        filter: drop-shadow(0 16px 36px rgba(45,31,17,0.12));
+        transition: transform 550ms cubic-bezier(0.16,1,0.3,1);
+      }
+
+      .cv-proj-card:hover .cv-proj-img {
+        transform: scale(1.04);
+      }
+
+      .cv-proj-info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .cv-proj-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .cv-proj-tag::before {
+        content: "";
+        width: 24px; height: 2px;
+        background: currentColor;
+      }
+
+      .cv-proj-name {
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        font-weight: 850;
+        letter-spacing: -0.06em;
+        line-height: 1.1;
+      }
+
+      .cv-proj-desc {
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      /* ── Education ── */
+      .cv-edu-card {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        background: var(--surface);
+        border: 1px solid rgba(17,17,17,0.07);
+        border-radius: var(--radius);
+        padding: 40px 48px;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        position: relative; overflow: hidden;
+        transition: border-color 260ms ease, box-shadow 260ms ease, transform 440ms cubic-bezier(0.16,1,0.3,1);
+      }
+
+      .cv-edu-card::after {
+        position: absolute;
+        right: -60px; bottom: -60px;
+        width: 180px; height: 180px;
+        border-radius: 50%;
+        content: "";
+        background: var(--accent-soft);
+        opacity: 0.45;
+      }
+
+      .cv-edu-card:hover {
+        border-color: rgba(255,113,0,0.25);
+        box-shadow: 0 24px 64px rgba(45,31,17,0.1);
+        transform: translateY(-3px);
+      }
+
+      .cv-edu-icon {
+        display: grid;
+        width: 62px; height: 62px;
+        place-items: center;
+        border-radius: 20px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        flex-shrink: 0;
+        position: relative; z-index: 1;
+      }
+
+      .cv-edu-icon svg {
+        width: 28px; height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.7;
+      }
+
+      .cv-edu-body { position: relative; z-index: 1; }
+
+      .cv-edu-body h3 {
+        font-size: 1.4rem;
+        font-weight: 850;
+        letter-spacing: -0.04em;
+        margin-bottom: 4px;
+      }
+
+      .cv-edu-body p { color: var(--muted); font-size: 0.9rem; }
+
+      /* ── Responsive ── */
+      @media (max-width: 900px) {
+        .cv-services-grid { grid-template-columns: 1fr; }
+        .cv-exp-grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 760px) {
+        .cv-about-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .cv-photo-wrap { width: 100px; }
+
+        .cv-proj-card {
+          grid-template-columns: 1fr !important;
+          gap: 28px;
+          padding: 30px 24px;
+        }
+
+        .cv-proj-card:nth-child(even) .cv-proj-img-wrap {
+          order: 0;
+        }
+
+        .cv-edu-card {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 30px 28px;
+          gap: 18px;
+        }
+
+        .cv-sec { padding-block: 64px; }
+      }
+
+      @media (max-width: 480px) {
+        .cv-exp-card { padding: 28px 24px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="ambient ambient--one"  aria-hidden="true"></div>
+    <div class="ambient ambient--two"  aria-hidden="true"></div>
+
+    <!-- ── Nav ── -->
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="brand" href="index.html" aria-label="Leoclecio Ambrosio — início">
+        <span class="brand__mark" aria-hidden="true">LA</span>
+        <span class="brand__name">Leoclecio</span>
+      </a>
+      <div class="nav__menu">
+        <a class="nav__link" href="#sobre">Sobre</a>
+        <a class="nav__link" href="#projetos">Projetos</a>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- ══════════════════════════════════════
+           HERO — Identidade + Contato
+           ══════════════════════════════════════ -->
+      <section class="cv-hero" id="inicio">
+        <div class="cv-hero__inner container">
+
+          <span class="eyebrow"
+            style="opacity:0;animation:fade-up 900ms cubic-bezier(0.16,1,0.3,1) 80ms forwards">
+            Currículo Profissional
+          </span>
+
+          <h1 class="cv-name"
+            style="opacity:0;animation:fade-up 900ms cubic-bezier(0.16,1,0.3,1) 230ms forwards">
+            Leoclecio<br /><span>Ambrosio</span>
+          </h1>
+
+          <p class="cv-title"
+            style="opacity:0;animation:fade-up 900ms cubic-bezier(0.16,1,0.3,1) 380ms forwards">
+            Desenvolvedor de Soluções Digitais
+          </p>
+
+          <div class="cv-chips"
+            aria-label="Informações de contato"
+            style="opacity:0;animation:fade-up 900ms cubic-bezier(0.16,1,0.3,1) 490ms forwards">
+
+            <span class="cv-chip cv-chip--plain">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              Cerquilho · SP
+            </span>
+
+            <a class="cv-chip" href="tel:+5515992568868">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.13 12 19.79 19.79 0 0 1 1.06 3.28 2 2 0 0 1 3.03 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (15) 99256-8868
+            </a>
+
+            <a class="cv-chip" href="mailto:leoclecio@outlook.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              leoclecio@outlook.com
+            </a>
+
+            <a class="cv-chip" href="https://linkedin.com/in/leoclecio" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+
+
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           SOBRE — Foto + Bio
+           ══════════════════════════════════════ -->
+      <section class="cv-sec" id="sobre" aria-labelledby="sobre-title">
+        <div class="container">
+          <span class="eyebrow reveal">Sobre mim</span>
+          <div class="cv-about-grid reveal">
+
+            <div class="cv-photo-wrap">
+              <img src="foto.jpg" alt="Foto de Leoclecio Ambrosio" class="cv-photo" loading="lazy" />
+            </div>
+
+            <div class="cv-about-body">
+              <div>
+                <h2 id="sobre-title" class="cv-about-name">Leoclecio<br />Ambrosio</h2>
+                <p class="cv-about-role">Desenvolvedor de Soluções Digitais · Cerquilho, SP</p>
+              </div>
+              <p class="cv-about-text">
+                Desenvolvedor de soluções digitais com atuação na criação de sites, aplicativos e sistemas sob medida. Possuo perfil prático, criativo e focado na resolução de problemas, transformando necessidades de negócios em soluções funcionais, intuitivas e fáceis de usar.
+              </p>
+              <p class="cv-about-text">
+                Busco contribuir em agências ou equipes de tecnologia, desenvolvimento e inovação, entregando soluções de qualidade que gerem resultados reais para empresas e usuários.
+              </p>
+              <a class="btn-whatsapp" href="https://wa.me/5515992568868" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                Falar no WhatsApp
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- ══════════════════════════════════════
+           O QUE FAÇO — Serviços / Áreas de Atuação
+           ══════════════════════════════════════ -->
+      <section class="cv-sec" id="atuacao" aria-labelledby="svc-title">
+        <div class="container">
+          <span class="eyebrow reveal" id="svc-title">O que faço</span>
+          <div class="cv-services-grid">
+
+            <article class="cv-svc-card reveal">
+              <span class="cv-svc-num" aria-hidden="true">01</span>
+              <div class="cv-svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18M7 6h.01M10 6h.01"/><path d="m9 14 2 2 4-5"/></svg>
+              </div>
+              <h3>Criação de Sites e Landing Pages</h3>
+              <p>Sites modernos, rápidos e responsivos, desenvolvidos para apresentar sua empresa com credibilidade e transformar visitas em oportunidades.</p>
+              <span class="cv-svc-tag">Presença digital</span>
+            </article>
+
+            <article class="cv-svc-card reveal">
+              <span class="cv-svc-num" aria-hidden="true">02</span>
+              <div class="cv-svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 0-3 3v1a4 4 0 0 0-3 6.65V18a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4.35A4 4 0 0 0 15 7V6a3 3 0 0 0-3-3Z"/><path d="M9 12h6M12 9v6"/></svg>
+              </div>
+              <h3>Soluções Internas e CRM</h3>
+              <p>Ferramentas criadas sob medida para organizar rotinas, automatizar tarefas e tornar os processos internos mais simples e eficientes.</p>
+              <span class="cv-svc-tag">Tecnologia sob medida</span>
+            </article>
+
+            <article class="cv-svc-card reveal">
+              <span class="cv-svc-num" aria-hidden="true">03</span>
+              <div class="cv-svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              </div>
+              <h3>Google Meu Negócio</h3>
+              <p>Criação e otimização do perfil da sua empresa no Google para melhorar a visibilidade local e facilitar que novos clientes encontrem você.</p>
+              <span class="cv-svc-tag">Visibilidade local</span>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PROJETOS — Trabalhos realizados
+           ══════════════════════════════════════ -->
+      <section class="cv-sec" id="projetos" aria-labelledby="proj-title">
+        <div class="container">
+          <span class="eyebrow reveal" id="proj-title">Projetos Realizados</span>
+
+          <div class="cv-projects-list">
+
+            <!-- Immovi -->
+            <article class="cv-proj-card reveal">
+              <div class="cv-proj-img-wrap">
+                <img src="imagens/site_immovi_desktop.png" alt="Site Immovi — visualização desktop" class="cv-proj-img" loading="lazy" />
+              </div>
+              <div class="cv-proj-info">
+                <span class="cv-proj-tag">Site &amp; CRM Simplificado</span>
+                <h3 class="cv-proj-name">Immovi</h3>
+                <p class="cv-proj-desc">Site responsivo para escritório contábil especializado no mercado imobiliário, integrado a um painel (CRM) simplificado para recebimento, controle e gestão dos leads capturados via formulários do site.</p>
+              </div>
+            </article>
+
+            <!-- CRM WhatsApp -->
+            <article class="cv-proj-card reveal">
+              <div class="cv-proj-img-wrap">
+                <img src="imagens/crm_connect_desktop.png" alt="CRM WhatsApp — painel principal" class="cv-proj-img" loading="lazy" />
+              </div>
+              <div class="cv-proj-info">
+                <span class="cv-proj-tag">CRM &amp; Extensão Web</span>
+                <h3 class="cv-proj-name">CRM WhatsApp</h3>
+                <p class="cv-proj-desc">Sistema simples e sob medida para gestão de relacionamento com clientes, integrado ao WhatsApp Web através de uma extensão de navegador. A plataforma conta com um pipeline visual estilo Kanban para controle prático das etapas de atendimento e negociação.</p>
+              </div>
+            </article>
+
+            <!-- App Gestão -->
+            <article class="cv-proj-card reveal">
+              <div class="cv-proj-img-wrap">
+                <img src="imagens/app_gestao_desktop.png" alt="App Gestão — painel principal" class="cv-proj-img" loading="lazy" />
+              </div>
+              <div class="cv-proj-info">
+                <span class="cv-proj-tag">Gestão Contábil &amp; IA</span>
+                <h3 class="cv-proj-name">App Gestão</h3>
+                <p class="cv-proj-desc">Aplicativo desenvolvido para escritórios de contabilidade gerenciarem dados estruturados de empresas clientes, substituindo planilhas complexas por um painel centralizado e integrado a um assistente inteligente para consultas e suporte de informações.</p>
+              </div>
+            </article>
+
+            <!-- App Barbeiro -->
+            <article class="cv-proj-card reveal">
+              <div class="cv-proj-img-wrap">
+                <img src="imagens/app_barbeiro_desktop.png" alt="App Barbeiro — visualização desktop" class="cv-proj-img" loading="lazy" />
+              </div>
+              <div class="cv-proj-info">
+                <span class="cv-proj-tag">Aplicativo sob Medida</span>
+                <h3 class="cv-proj-name">App Barbeiro</h3>
+                <p class="cv-proj-desc">Aplicativo desenvolvido sob medida para barbearias, eliminando o uso de papéis e anotações manuais. O sistema centraliza agendamentos de clientes, controle de comissão dos profissionais e relatórios de faturamento em um painel gerencial completo.</p>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           FORMAÇÃO
+           ══════════════════════════════════════ -->
+      <section class="cv-sec" id="formacao" aria-labelledby="edu-title">
+        <div class="container">
+          <span class="eyebrow reveal" id="edu-title">Formação</span>
+          <div class="cv-edu-card reveal">
+            <div class="cv-edu-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="cv-edu-body">
+              <h3>Ensino Médio Completo</h3>
+              <p>Formação acadêmica concluída</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__container">
+        <p class="footer__copyright">&copy; 2026 Leoclecio Ambrosio. Todos os direitos reservados.</p>
+        <a class="footer__top" href="#inicio">Voltar ao topo ↑</a>
+      </div>
+    </footer>
+
+  </body>
+</html>
